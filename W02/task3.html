@@ -13,9 +13,17 @@
         <form id="id_form2" action="">
             v2 = (<input name="x0" type="text">,<input name="y0" type="text">,<input name="z0" type="text">);
         </form>
+        <input type="button"
+        onclick="Cal_area()"
+        value="Caluculate the area"
+        >
         <script src="vec3.js"></script>
         <script>
-
+            function Cal_area(){
+                var x0 = document.getElementById('id_form0').x0.value;
+            }
+            console.log(x0);
+            //var v0 = new Vec3(x0,y0,z0);
         </script>
     </body>
 </html>
