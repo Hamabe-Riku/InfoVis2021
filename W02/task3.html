@@ -22,7 +22,6 @@
             function AreaOfTriangle(v0,v1,v2){
                 var a = v1.sub(v0);
                 var b = v2.sub(v0);
-                document.write(a[0]);
                 S = 0.5*Math.sqrt(a.square()*b.square()-Math.pow(a.inner(b),2));
                 return S;
             }
