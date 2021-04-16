@@ -22,8 +22,8 @@
             function AreaOfTriangle(v0,v1,v2){
                 var a = v1.sub(v0);
                 var b = v2.sub(v0);
-                document.write(a[0]);
-                document.write(b[1]);
+                document.write(a.sum());
+                document.write(b.sum());
                 S = Math.sqrt(Math.pow(a[0]*b[2]-a[2]*b[1])+Math.pow(a[2]*b[0]-a[0]*b[2])+Math.pow(a[0]*b[1]-a[1]*b[0]));
                 return S;
             }
@@ -43,8 +43,8 @@
                 var v1 = new Vec3(x1,y1,z1);
                 var v2 = new Vec3(x2,y2,z2);
 
-                document.write(v0[0]);
-                document.write(v1[1]);
+                document.write(v0.sum());
+                document.write(v1.sum());
                 var S = AreaOfTriangle(v0,v1,v2);
                 document.write(S);
             }
