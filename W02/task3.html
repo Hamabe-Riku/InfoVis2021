@@ -22,7 +22,7 @@
             function AreaOfTriangle(v0,v1,v2){
                 var a = v1.sub(v0);
                 var b = v2.sub(v0);
-                S = Math.sqrt(Math.pow(a[0]*b[2]-a[2]*b[1])+Math.pow(a[2]*b[0]-a[0]*b[2])+Math.pow(a[0]*b[1]-a[1]*b[0]));
+                S = Math.sqrt(Math.pow(a[0]*b[2]-a[2]*b[1],2)+Math.pow(a[2]*b[0]-a[0]*b[2],2)+Math.pow(a[0]*b[1]-a[1]*b[0],2));
                 return S;
             }
             
