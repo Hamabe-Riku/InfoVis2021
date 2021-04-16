@@ -23,6 +23,14 @@ class Vec3
         return this;
     }
 
+    square(){
+        return Math.pow(this.x,2)+Math.pow(this.y,2)+Math.pow(this.z,2);
+    }
+
+    inner(v){
+        return this.x*v.x + this.y*v.y + this.z*v.z;
+    }
+
     sum()
     {
         return this.x + this.y + this.z;
