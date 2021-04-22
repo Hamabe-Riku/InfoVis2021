@@ -11,16 +11,23 @@
         var svg = d3.select("body").append("svg");
         d3.csv("https://Hamabe-Riku.github.io/InfoVis2021/W04/w04_task2.csv",draw);
         function  draw(data){
-            svg.selectAll("text")
+            
             svg.selectAll("rect")
                 .data(data)
                 .enter()
                 .append("rect")
-                .attr("x", padding)
+                .attr("x", padding+40)
                 .attr("y", function(d,i){ return padding + i * ( height + padding ); })
                 .attr("width", function(d){ return d.width; })
                 .attr("height", height)
-                .attr("fill", function(d){ return d.color; })
+                .attr("fill", function(d){ return "rgb(0,0," + d.width + ")"; })
+                svg.selectAll("text")
+                    .data(data)
+                    .enter()
+                    .append("text")
+                    .text(function(d){
+                        return d.label;
+                    })
         };
         </script>
     </body>
