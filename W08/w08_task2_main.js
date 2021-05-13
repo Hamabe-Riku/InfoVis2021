@@ -6,6 +6,7 @@ d3.csv("https://hamabe-riku.github.io/InfoVis2021/W08/w08_task2.csv")
             parent: '#drawing_region',
             width: 256,
             height: 128,
+            margin: {top:10, right:10, bottom:20, left:60}
         };
 
         const linechart = new LineChart(config,data);
@@ -34,14 +35,15 @@ class LineChart{
         self.svg = d3.select(self.config.parent)
             .attr('width', self.config.width)
             .attr('height', self.config.height);
+
+        self.line = d3.line()
+            // .attr('transform', `translate(${self.config.margin.left}, ${self.config.margin.top})`)
+            .x( d => d.x )
+            .y( d => d.y );
     }
 
     update(){
         let self = this;
-
-        const line = d3.line()
-                .x( d => d.x )
-                .y( d => d.y );
 
         self.render();
     }

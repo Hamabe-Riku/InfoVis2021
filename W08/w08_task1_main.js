@@ -1,6 +1,5 @@
 d3.csv("https://hamabe-riku.github.io/InfoVis2021/W08/w08_task1.csv")
     .then( data =>{
-        data.forEach( d => { d.label = +d.label; d.value = +d.value; });
 
         var config = {
             parent: '#drawing_region',
@@ -8,7 +7,6 @@ d3.csv("https://hamabe-riku.github.io/InfoVis2021/W08/w08_task1.csv")
             height: 128,
             margin: {top:10, right:10, bottom:20, left:60}
         };
-
         const barchart = new BarChart(config,data);
         barchart.update(); 
     })
@@ -64,11 +62,9 @@ class BarChart{
 
     update(){
         let self = this;
-
         const xmin = 0;
-        const xmax = d3.max(self.data, d => d.value);
+        const xmax = d3.max(self.data, d => Number(d.value));
         self.xscale.domain([xmin,xmax]);
-
         self.yscale.domain(self.data.map(d => d.label)).paddingInner(0.1);
 
         self.render();
@@ -89,6 +85,8 @@ class BarChart{
 
         self.yaxis_group
             .call( self.yaxis);
+
+        
 
     }
 }
