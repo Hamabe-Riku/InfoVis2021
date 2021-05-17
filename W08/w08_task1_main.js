@@ -4,8 +4,8 @@ d3.csv("https://hamabe-riku.github.io/InfoVis2021/W08/w08_task1.csv")
         var config = {
             parent: '#drawing_region',
             width: 256,
-            height: 128,
-            margin: {top:10, right:10, bottom:20, left:60}
+            height: 256,
+            margin: {top:20, right:10, bottom:50, left:60}
         };
         const barchart = new BarChart(config,data);
         barchart.update(); 
@@ -34,8 +34,15 @@ class BarChart{
             .attr('width', self.config.width)
             .attr('height', self.config.height);
 
+        self.svg.append("text")
+            .attr("x",self.config.width/3)
+            .attr("y",self.config.margin.top)
+            .attr("font-size","15px")
+            .attr("font-weight",1000)
+            .text("Food Weight");
+
         self.chart = self.svg.append('g')
-            .attr('transform', `translate(${self.config.margin.left}, ${self.config.margin.top})`);
+            .attr('transform', `translate(${self.config.margin.left}, ${self.config.margin.top*2})`);
 
         self.inner_width = self.config.width - self.config.margin.left - self.config.margin.right;
         self.inner_height = self.config.height - self.config.margin.top - self.config.margin.bottom;
@@ -81,7 +88,7 @@ class BarChart{
             .attr("height", self.yscale.bandwidth());
 
         self.xaxis_group
-            .call( self.xaxis);
+            .call( self.xaxis)
 
         self.yaxis_group
             .call( self.yaxis);
