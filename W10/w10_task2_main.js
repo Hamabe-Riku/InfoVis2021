@@ -1,6 +1,6 @@
-d3.csv("https://vizlab-kobe-lecture.github.io/InfoVis2021/W04/data.csv")
+d3.csv("https://vizlab-kobe-lecture.github.io/InfoVis2021/W10/w10_task2.csv")
     .then( data => {
-        data.forEach( d => { d.x = +d.x; d.y = +d.y; });
+        data.forEach( d => { d.temperature = +d.temperature; });
 
         var config = {
             parent: '#drawing_region',
@@ -49,8 +49,8 @@ class ScatterPlot {
         self.inner_width = self.config.width - self.config.margin.left - self.config.margin.right;
         self.inner_height = self.config.height - self.config.margin.top - self.config.margin.bottom;
 
-        self.xscale = d3.scaleLinear()
-            .range( [self.config.margin.left , self.inner_width] );
+        self.xscale = d3.d3.scaleBand()
+            .range([0, self.inner_width]);
 
         self.yscale = d3.scaleLinear()
             .range( [0, self.inner_height] );
@@ -58,8 +58,8 @@ class ScatterPlot {
         self.xaxis = d3.axisBottom( self.xscale )
             .ticks(10);
 
-        self.xaxis_group = self.chart.append('g')
-            .attr('transform', `translate(0, ${self.inner_height})`);
+        self.xaxis_group = self.chart.append('g');
+            // .attr('transform', `translate(0, ${self.inner_height})`);
 
         self.yaxis = d3.axisLeft( self.yscale )
             .ticks(10);
@@ -71,12 +71,12 @@ class ScatterPlot {
     update() {
         let self = this;
 
-        const xmin = d3.min( self.data, d => d.x );
-        const xmax = d3.max( self.data, d => d.x );
-        self.xscale.domain( [xmin - self.config.margin.left, xmax + self.config.margin.right] );
+        // const xmin = d3.min( self.data, d => d.x );
+        // const xmax = d3.max( self.data, d => d.x );
+        self.xscale.domain(self.data.map(d => d.month)).paddingInner(0.1);
 
-        const ymin = d3.min( self.data, d => d.y );
-        const ymax = d3.max( self.data, d => d.y );
+        const ymin = 0;
+        const ymax = d3.max( self.data, d => Number(d.temperature) );
         self.yscale.domain( [ ymax + self.config.margin.bottom , ymin - self.config.margin.top] );
 
         self.render();
@@ -89,9 +89,9 @@ class ScatterPlot {
             .data(self.data)
             .enter()
             .append("circle")
-            .attr("cx", d => self.xscale( d.x ) )
+            .attr("cx", d => self.xscale(d.month) )
             .attr("cy", d => self.yscale( d.y ) )
-            .attr("r", d => d.r )
+            .attr("r", 20)
             .attr('class','circle');
 
         self.xaxis_group
