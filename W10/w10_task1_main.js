@@ -9,6 +9,18 @@ d3.csv("https://hamabe-riku.github.io/InfoVis2021/W08/w08_task1.csv")
         };
         const barchart = new BarChart(config,data);
         barchart.update(); 
+        
+        d3.select('#reverse')
+            .on('click', d => {
+                data.reverse();
+                barchart.update(data);
+            });
+
+        d3.select('#descend')
+            .on('click', d => {
+                data.sort(barchart.descend);
+                barchart.update(data);
+            });
     })
     .catch( error => {
         console.log( error );
@@ -95,6 +107,9 @@ class BarChart{
         self.yaxis_group
             .call( self.yaxis);
     }
+
+    descend(a,b) {
+        return b.value-a.value;
+    }
    
 }
-
