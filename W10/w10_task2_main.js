@@ -1,4 +1,4 @@
-d3.csv("https://vizlab-kobe-lecture.github.io/InfoVis2021/W04/data.csv")
+d3.csv("https://hamabe-riku.github.io/InfoVis2021/W10/data.csv")
     .then( data => {
         data.forEach( d => { d.x = +d.x; d.y = +d.y; });
 
@@ -8,7 +8,6 @@ d3.csv("https://vizlab-kobe-lecture.github.io/InfoVis2021/W04/data.csv")
             height: 512,
             margin: {top:20, right:10, bottom:30, left:20}
         };
-
         const scatter_plot = new ScatterPlot( config, data );
         scatter_plot.update();
     })
@@ -37,11 +36,11 @@ class ScatterPlot {
             .attr('height', self.config.height + self.config.margin.top + self.config.margin.bottom);
         
         self.svg.append("text")
-            .attr("x",self.config.width/3)
+            .attr("x",self.config.width/4)
             .attr("y",self.config.margin.top)
             .attr("font-size","20px")
             .attr("font-weight",1000)
-            .text("Scatter Plot");
+            .text("Kobe City 2020 Average Temperature");
 
         self.chart = self.svg.append('g')
             .attr('transform', `translate(${self.config.margin.left}, ${self.config.margin.top})`);
@@ -73,11 +72,11 @@ class ScatterPlot {
 
         const xmin = d3.min( self.data, d => d.x );
         const xmax = d3.max( self.data, d => d.x );
-        self.xscale.domain([xmin - self.config.margin.left, xmax + self.config.margin.right]);
+        self.xscale.domain([xmin , xmax]);
 
         const ymin = d3.min( self.data, d => d.y );
         const ymax = d3.max( self.data, d => d.y );
-        self.yscale.domain( [ ymax + self.config.margin.bottom , ymin - self.config.margin.top] );
+        self.yscale.domain( [ ymax + 5  , 0 ] );
 
         self.render();
     }
@@ -97,7 +96,7 @@ class ScatterPlot {
         self.xaxis_group
             .call( self.xaxis )
             .append("text")
-            .text("X-label")
+            .text("Month")
             .attr("stroke","#000")
             .attr("fill","#000")
             .attr("x",self.config.width/2)
@@ -108,7 +107,7 @@ class ScatterPlot {
         self.yaxis_group
             .call( self.yaxis )
             .append("text")
-            .text("Y-label")
+            .text("Temperature")
             .attr("stroke","#000")
             .attr("fill","#000")
             .attr("x",self.config.margin.left * (-1.5))
