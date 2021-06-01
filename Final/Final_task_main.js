@@ -3,56 +3,40 @@ let scatter_plot;
 let bar_chart;
 let filter = [];
 
-d3.csv("https://hamabe-riku.github.io/InfoVis2021/Final/Corona_num_pop.csv")
+d3.csv("https://hamabe-riku.github.io/InfoVis2021/Final/Corona_num.csv")
     .then( data => {
         input_data = data;
         input_data.forEach( d => {
             d.Code = +d.Code;
             d.Infected = +d.Infected;
             d.Population = +d.Population;
+            d.Guests = +d.Guests;
         });
 
         const color_scale = d3.scaleLinear();
-        color_scale.domain([d.Code]).range(['red','yellow','green','blue']);
+        color_scale.domain([data.Code]).range(['red','yellow','green','blue']);
 
-        scatter_plot_1 = new ScatterPlot( {
-            parent: '#drawing_region_scatterplot',
+        scatter_plot_population = new ScatterPlot( {
+            parent: '#drawing_region_scatterplot_population',
             width: 256,
             height: 256,
             margin: {top:10, right:10, bottom:50, left:50},
-            xlabel: 'Sepal length [cm]',
-            ylabel: 'Sepal width [cm]',
+            xlabel: 'Population [人]',
+            ylabel: 'Infected [人]',
             cscale: color_scale
         }, input_data );
-        scatter_plot_1.update();
-    })
-    .catch( error => {
-        console.log( error );
-    });
+        scatter_plot_population.update_population();
 
-d3.csv("https://hamabe-riku.github.io/InfoVis2021/Final/Corona_num_tour.csv")
-    .then( data => {
-        input_data = data;
-        input_data.forEach( d => {
-            d.Code = +d.Code;
-            d.Infected = +d.Infected;
-            d.Population = +d.Guests;
-        });
-
-        const color_scale = d3.scaleLinear();
-        color_scale.domain([d.Code]).range(['red','yellow','green','blue']);
-
-        scatter_plot_2 = new ScatterPlot( {
-            parent: '#drawing_region_scatterplot',
+        scatter_plot_guests = new ScatterPlot( {
+            parent: '#drawing_region_scatterplot_guests',
             width: 256,
             height: 256,
             margin: {top:10, right:10, bottom:50, left:50},
-            xlabel: 'Sepal length [cm]',
-            ylabel: 'Sepal width [cm]',
+            xlabel: 'Guests [人]',
+            ylabel: 'Infected [人]',
             cscale: color_scale
         }, input_data );
-        scatter_plot_2.update();
-
+        scatter_plot_guests.update_guests();
     })
     .catch( error => {
         console.log( error );
@@ -60,10 +44,10 @@ d3.csv("https://hamabe-riku.github.io/InfoVis2021/Final/Corona_num_tour.csv")
 
 function Filter() {
     if ( filter.length == 0 ) {
-        scatter_plot1.data = input_data;
+        scatter_plot_population.data = input_data;
     }
     else {
-        scatter_plot1.data = input_data.filter( d => filter.includes( d.species ) );
+        scatter_plot_population.data = input_data.filter( d => filter.includes( d.Prefectures ) );
     }
-    scatter_plot1.update();
+    scatter_plot1.update_population();
 }

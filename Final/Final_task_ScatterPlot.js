@@ -67,12 +67,12 @@ class ScatterPlot {
             .text( self.config.ylabel );
     }
 
-    update() {
+    update_population() {
         let self = this;
 
-        self.cvalue = d => d.species;
-        self.xvalue = d => d.sepal_length;
-        self.yvalue = d => d.sepal_width;
+        self.cvalue = d => d.Prefectures;
+        self.xvalue = d => d.Population;
+        self.yvalue = d => d.Infected;
 
         const xmin = d3.min( self.data, self.xvalue );
         const xmax = d3.max( self.data, self.xvalue );
@@ -82,10 +82,28 @@ class ScatterPlot {
         const ymax = d3.max( self.data, self.yvalue );
         self.yscale.domain( [ymax, ymin] );
 
-        self.render();
+        self.render_population();
     }
 
-    render() {
+    update_guests() {
+        let self = this;
+
+        self.cvalue = d => d.Prefectures;
+        self.xvalue = d => d.Guests;
+        self.yvalue = d => d.Infected;
+
+        const xmin = d3.min( self.data, self.xvalue );
+        const xmax = d3.max( self.data, self.xvalue );
+        self.xscale.domain( [xmin, xmax] );
+
+        const ymin = d3.min( self.data, self.yvalue );
+        const ymax = d3.max( self.data, self.yvalue );
+        self.yscale.domain( [ymax, ymin] );
+
+        self.render_guests();
+    }
+
+    render_population() {
         let self = this;
 
         let circles = self.chart.selectAll("circle")
@@ -104,7 +122,46 @@ class ScatterPlot {
             .on('mouseover', (e,d) => {
                 d3.select('#tooltip')
                     .style('opacity', 1)
-                    .html(`<div class="tooltip-label">${d.species}</div>(${d.sepal_length}, ${d.sepal_length})`);
+                    .html(`<div class="tooltip-label">${d.Prefectures}</div>(${d.Population}, ${d.Infected})`);
+            })
+            .on('mousemove', (e) => {
+                const padding = 10;
+                d3.select('#tooltip')
+                    .style('left', (e.pageX + padding) + 'px')
+                    .style('top', (e.pageY + padding) + 'px');
+            })
+            .on('mouseleave', () => {
+                d3.select('#tooltip')
+                    .style('opacity', 0);
+            });
+
+        self.xaxis_group
+            .call( self.xaxis );
+
+        self.yaxis_group
+            .call( self.yaxis );
+    }
+
+    render_guests() {
+        let self = this;
+
+        let circles = self.chart.selectAll("circle")
+            .data(self.data)
+            .join('circle');
+
+        const circle_color = 'steelblue';
+        const circle_radius = 3;
+        circles
+            .attr("r", circle_radius )
+            .attr("cx", d => self.xscale( self.xvalue(d) ) )
+            .attr("cy", d => self.yscale( self.yvalue(d) ) )
+            .attr("fill", d => self.config.cscale( self.cvalue(d) ) );
+
+        circles
+            .on('mouseover', (e,d) => {
+                d3.select('#tooltip')
+                    .style('opacity', 1)
+                    .html(`<div class="tooltip-label">${d.Prefectures}</div>(${d.Guests}, ${d.Infected})`);
             })
             .on('mousemove', (e) => {
                 const padding = 10;
