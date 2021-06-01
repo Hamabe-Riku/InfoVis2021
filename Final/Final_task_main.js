@@ -13,8 +13,8 @@ d3.csv("https://hamabe-riku.github.io/InfoVis2021/Final/Corona_num.csv")
             d.Guests = +d.Guests;
         });
 
-        const color_scale = d3.scaleLinear();
-        color_scale.domain([data.Code]).range(['red','yellow','green','blue']);
+        const color_scale = d3.scaleSequential(d3.interpolateRainbow);
+        color_scale.domain([0,46]);
 
         scatter_plot_population = new ScatterPlot( {
             parent: '#drawing_region_scatterplot_population',

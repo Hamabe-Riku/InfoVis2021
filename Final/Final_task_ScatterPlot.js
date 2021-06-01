@@ -50,6 +50,7 @@ class ScatterPlot {
 
         const xlabel_space = 40;
         self.svg.append('text')
+            .style('font-family','utf-8')
             .style('font-size', '12px')
             .attr('x', self.config.margin.left + self.inner_width / 2)
             .attr('y', self.inner_height + self.config.margin.top + xlabel_space)
@@ -58,6 +59,7 @@ class ScatterPlot {
 
         const ylabel_space = 45;
         self.svg.append('text')
+            .style('font-family','utf-8')
             .style('font-size', '12px')
             .attr('transform', `rotate(-90)`)
             .attr('y', self.config.margin.left - ylabel_space)
@@ -70,7 +72,7 @@ class ScatterPlot {
     update_population() {
         let self = this;
 
-        self.cvalue = d => d.Prefectures;
+        self.cvalue = d => d.Code;
         self.xvalue = d => d.Population;
         self.yvalue = d => d.Infected;
 
@@ -80,7 +82,7 @@ class ScatterPlot {
 
         const ymin = d3.min( self.data, self.yvalue );
         const ymax = d3.max( self.data, self.yvalue );
-        self.yscale.domain( [ymax, ymin] );
+        self.yscale.domain( [0, ymax] );
 
         self.render_population();
     }
@@ -88,7 +90,7 @@ class ScatterPlot {
     update_guests() {
         let self = this;
 
-        self.cvalue = d => d.Prefectures;
+        self.cvalue = d => d.Code;
         self.xvalue = d => d.Guests;
         self.yvalue = d => d.Infected;
 
@@ -98,7 +100,7 @@ class ScatterPlot {
 
         const ymin = d3.min( self.data, self.yvalue );
         const ymax = d3.max( self.data, self.yvalue );
-        self.yscale.domain( [ymax, ymin] );
+        self.yscale.domain( [0, ymax] );
 
         self.render_guests();
     }
@@ -156,7 +158,7 @@ class ScatterPlot {
             .attr("cx", d => self.xscale( self.xvalue(d) ) )
             .attr("cy", d => self.yscale( self.yvalue(d) ) )
             .attr("fill", d => self.config.cscale( self.cvalue(d) ) );
-
+        console.log(self.data);
         circles
             .on('mouseover', (e,d) => {
                 d3.select('#tooltip')
