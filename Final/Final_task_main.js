@@ -21,7 +21,7 @@ d3.csv("https://hamabe-riku.github.io/InfoVis2021/Final/Corona_num.csv")
             width: 512,
             height: 512,
             margin: {top:10, right:10, bottom:50, left:50},
-            xlabel: 'Population [人]',
+            xlabel: 'Population [千人]',
             ylabel: 'Infected [人]',
             cscale: color_scale
         }, input_data );
@@ -32,7 +32,7 @@ d3.csv("https://hamabe-riku.github.io/InfoVis2021/Final/Corona_num.csv")
             width: 512,
             height: 512,
             margin: {top:10, right:10, bottom:50, left:50},
-            xlabel: 'Guests [人]',
+            xlabel: 'Guests [千人]',
             ylabel: 'Infected [人]',
             cscale: color_scale
         }, input_data );
