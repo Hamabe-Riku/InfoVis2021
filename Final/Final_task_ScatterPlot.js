@@ -50,7 +50,7 @@ class ScatterPlot {
 
         const xlabel_space = 40;
         self.svg.append('text')
-            .style('font-family','utf-8')
+            .style('font-family','shift-jis')
             .style('font-size', '12px')
             .attr('x', self.config.margin.left + self.inner_width / 2)
             .attr('y', self.inner_height + self.config.margin.top + xlabel_space)
