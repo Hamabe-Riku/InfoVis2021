@@ -34,12 +34,12 @@ class ScatterPlot {
             .range( [self.inner_height, 0] );
 
         self.xaxis = d3.axisBottom( self.xscale )
-            .ticks(3)
+            .ticks(4)
             .tickSize(5)
             .tickPadding(5);
 
         self.yaxis = d3.axisLeft( self.yscale )
-            .ticks(3)
+            .ticks(5)
             .tickSize(5)
             .tickPadding(5);
 
@@ -50,7 +50,7 @@ class ScatterPlot {
 
         const xlabel_space = 40;
         self.svg.append('text')
-            .style('font-family','shift-jis')
+            .style('font-family','utf-8')
             .style('font-size', '12px')
             .attr('x', self.config.margin.left + self.inner_width / 2)
             .attr('y', self.inner_height + self.config.margin.top + xlabel_space)

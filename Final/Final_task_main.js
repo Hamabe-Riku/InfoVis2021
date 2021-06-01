@@ -18,8 +18,8 @@ d3.csv("https://hamabe-riku.github.io/InfoVis2021/Final/Corona_num.csv")
 
         scatter_plot_population = new ScatterPlot( {
             parent: '#drawing_region_scatterplot_population',
-            width: 256,
-            height: 256,
+            width: 512,
+            height: 512,
             margin: {top:10, right:10, bottom:50, left:50},
             xlabel: 'Population [人]',
             ylabel: 'Infected [人]',
@@ -29,8 +29,8 @@ d3.csv("https://hamabe-riku.github.io/InfoVis2021/Final/Corona_num.csv")
 
         scatter_plot_guests = new ScatterPlot( {
             parent: '#drawing_region_scatterplot_guests',
-            width: 256,
-            height: 256,
+            width: 512,
+            height: 512,
             margin: {top:10, right:10, bottom:50, left:50},
             xlabel: 'Guests [人]',
             ylabel: 'Infected [人]',
