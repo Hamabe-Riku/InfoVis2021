@@ -1,6 +1,6 @@
+// import geoJson from "./japan.json";
 let input_data;
 let scatter_plot;
-let bar_chart;
 let filter = [];
 
 d3.csv("https://hamabe-riku.github.io/InfoVis2021/Final/Corona_num.csv")
@@ -41,6 +41,39 @@ d3.csv("https://hamabe-riku.github.io/InfoVis2021/Final/Corona_num.csv")
     .catch( error => {
         console.log( error );
     });
+
+
+var map_width = 1024,
+    map_height = 1024,
+    scale = 1600;
+d3.json("./japan.json", createMap);
+function createMap(japan){
+    var projection = d3.geoMercator()
+        .center([136.0,37.0])
+        .translate([map_width/2,map_height/2])
+        .scale(scale);
+
+    var path = d3.geoPath().projection(projection);
+
+    var svg = d3.select('#drawing_region_japan')
+        .append('svg')
+        .attr('viewBox','0 0 ${map_width} ${map_height}')
+        .attr('width','100%')
+        .attr('height','100%');
+
+    svg
+        .selectAll(`path`)
+        .data(geoJson.features)
+        .enter()
+        .append(`path`)
+        .attr(`d`, path)
+        .attr(`stroke`, `#666`)
+        .attr(`stroke-width`, 0.25)
+        .attr(`fill`, `#2566CC`)
+        .attr(`fill-opacity`, (item) => {
+          return Math.random();
+        })
+}
 
 function Filter() {
     if ( filter.length == 0 ) {
