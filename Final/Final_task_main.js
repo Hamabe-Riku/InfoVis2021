@@ -3,7 +3,7 @@ let scatter_plot;
 let bar_chart;
 let filter = [];
 
-d3.csv("https://vizlab-kobe-lecture.github.io/InfoVis2021/W12/iris.csv")
+d3.csv("https://hamabe-riku.github.io/InfoVis2021/Final/Corona_num_pop.csv")
     .then( data => {
         input_data = data;
         input_data.forEach( d => {
