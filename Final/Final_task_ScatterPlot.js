@@ -158,7 +158,7 @@ class ScatterPlot {
             .attr("cx", d => self.xscale( self.xvalue(d) ) )
             .attr("cy", d => self.yscale( self.yvalue(d) ) )
             .attr("fill", d => self.config.cscale( self.cvalue(d) ) );
-        console.log(self.data);
+        
         circles
             .on('mouseover', (e,d) => {
                 d3.select('#tooltip')
