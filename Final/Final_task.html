@@ -1,33 +1,35 @@
+<!doctype html>
 <html lang="ja">
-    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <head>
+        <meta charset="utf-8">
         <title>Final task</title>
-	<style>
-	 body {
-	     font-family: system-ui;
-	 }
-	 .container {
-	     display: flex;
-	 }
-	 .bar.active {
-	     stroke: #000;
-	 }
-	 #tooltip {
-	     position: absolute;
-	     opacity: 0;
-	     background: #fff;
-	     border: 1px solid #ddd;
-         font-family: sans-serif;
-	     font-size: 12px;
-	     font-weight: 600;
-	     padding: 2px 8px;
-	 }
-	 .tooltip-label {
-	     font-weight: 500;
-	     font-size: 11px;
-	     color: #888;
-	 }
-	</style>
+        <style>
+            body {
+                font-family: system-ui;
+            }
+            .container {
+                display: flex;
+            }
+            .bar.active {
+                stroke: #000;
+            }
+            #tooltip {
+                position: absolute;
+                opacity: 0;
+                background: #fff;
+                border: 1px solid #ddd;
+                font-family: sans-serif;
+                font-size: 12px;
+                font-weight: 600;
+                padding: 2px 8px;
+            }
+            .tooltip-label {
+                font-weight: 500;
+                font-size: 11px;
+                color: #888;
+            }
+        </style>
     </head>
     <body>
 	<h2>Trends in the number of people infected with "Corona"</h2>
@@ -38,8 +40,9 @@
         <div><svg id="drawing_region_japan"></svg></div>
 	</div>
 	<script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/topojson.v0.min.js"></script>
 	<script src="Final_task_ScatterPlot.js"></script>
-    <!-- <script src="japan.geojson"></script> -->
+    <script src="Final_task_Japan.js"></script>
 	<script src="Final_task_main.js"></script>
     </body>
 </html>

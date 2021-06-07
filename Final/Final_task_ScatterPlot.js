@@ -113,7 +113,7 @@ class ScatterPlot {
             .join('circle');
 
         const circle_color = 'steelblue';
-        const circle_radius = 3;
+        const circle_radius = 5;
         circles
             .attr("r", circle_radius )
             .attr("cx", d => self.xscale( self.xvalue(d) ) )
@@ -152,7 +152,7 @@ class ScatterPlot {
             .join('circle');
 
         const circle_color = 'steelblue';
-        const circle_radius = 3;
+        const circle_radius = 5;
         circles
             .attr("r", circle_radius )
             .attr("cx", d => self.xscale( self.xvalue(d) ) )
