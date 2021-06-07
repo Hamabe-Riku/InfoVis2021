@@ -1,4 +1,4 @@
-// import geoJson from "../japan.json";
+// import geoJson from "japan.geojson";
 let input_data;
 let scatter_plot_population;
 let scatter_plot_guests;
@@ -47,11 +47,13 @@ d3.csv("https://hamabe-riku.github.io/InfoVis2021/Final/Corona_num.csv")
 var map_width = 1024,
     map_height = 1024,
     scale = 1600;
-d3.json("japan.geojson").then(function(error,japan){
+
+// const geoJson = await d3.json(`japan.geojson`);
+d3.json("https://hamabe-riku.github.io/InfoVis2021/Final/japan.geo.json").then(function(error,japan){
     if(error != null){
         return;
     }
-    console.log(japan);
+    // console.log(japan);
     var projection = d3.geoMercator()
         .center([136.0,37.0])
         .translate([map_width/2,map_height/2])
@@ -61,23 +63,23 @@ d3.json("japan.geojson").then(function(error,japan){
 
     var svg = d3.select('#drawing_region_japan')
         .append('svg')
-        // .attr('viewBox','0 0 ${map_width} ${map_height}')
+        .attr('viewBox','0 0 ${map_width} ${map_height}')
         .attr('width','100%')
         .attr('height','100%');
 
     svg
-        .selectAll(`path`)
+        .selectAll('path')
         .data(japan.features)
         .enter()
-        .append(`path`)
-        .attr(`d`, path)
-        .attr(`stroke`, `#666`)
-        .attr(`stroke-width`, 0.25)
-        .attr(`fill`, `#2566CC`)
-        .attr(`fill-opacity`, (item) => {
-          return Math.random();
-        })
-        .on("mousemove", function(item) {
+        .append('path')
+        .attr('d', path)
+        .attr('stroke', '#666')
+        .attr('stroke-width', 0.25)
+        .attr('fill', '#2566CC')
+        // .attr('fill-opacity', (d) => {
+        //   return Math.random();
+        // })
+        .on("mousemove", function(d) {
             // テキストのサイズ情報を取得
             const textSize = svg
               .select("#label-text")
@@ -93,19 +95,19 @@ d3.json("japan.geojson").then(function(error,japan){
             // ラベルの位置を移動
             svg
               .select("#label-group")
-              .attr(`transform`, `translate(${labelPos.x}, ${labelPos.y})`);
+              .attr('transform', 'translate(${labelPos.x}, ${labelPos.y})');
           })
       
           /**
            * 都道府県領域の MouseOut イベントハンドラ
            */
-          .on(`mouseout`, function(item) {
+          .on('mouseout', function(item) {
             // ラベルグループを削除
             svg.select("#label-group").remove();
       
             // マウス位置の都道府県領域を青色に戻す
-            d3.select(this).attr(`fill`, `#2566CC`);
-            d3.select(this).attr(`stroke-width`, `0.25`);
+            d3.select(this).attr('fill', '#2566CC');
+            d3.select(this).attr('stroke-width', '0.25');
           });
 })
 
