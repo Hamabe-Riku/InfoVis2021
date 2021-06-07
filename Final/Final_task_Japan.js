@@ -49,12 +49,12 @@ class makeMap{
                 .attr('stroke-width', 0.5)
                 .attr('fill', '#2566CC')
                 .on('click', function(ev,d) {
-                    const is_active = filter.includes(japan.features[0].properties.name);
+                    const is_active = filter.includes(d.properties.name);
                     if ( is_active ) {
-                        filter = filter.filter( f => f !== japan.features[0].properties.name );
+                        filter = filter.filter( f => f !== d.properties.name );
                     }
                     else {
-                        filter.push( japan.features[0].properties.name );
+                        filter.push( d.properties.name );
                     }
                     Filter();
                     d3.select(this).classed('active', !is_active);
