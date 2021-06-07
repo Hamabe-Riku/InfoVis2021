@@ -47,6 +47,7 @@ d3.csv("https://hamabe-riku.github.io/InfoVis2021/Final/Corona_num.csv")
             width: 512,
             height: 512,
             margin: {top:10, right:10, bottom:50, left:50},
+            label: '日本地図(都道府県をクリックしてください)',
             cscale: color_scale,
             scale: 1000
         },input_data,flag);
