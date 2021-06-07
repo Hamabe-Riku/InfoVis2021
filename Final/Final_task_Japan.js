@@ -24,7 +24,7 @@ class makeMap{
 
             self.path = d3.geoPath().projection(self.projection);
 
-            self.svg = d3.select("svg").attr("width",self.config.width).attr("height",self.config.height);
+            self.svg = d3.select(self.config.parent).attr("width",self.config.width).attr("height",self.config.height);
 
             self.map = self.svg.selectAll('path').data(japan.features);
 
@@ -48,6 +48,21 @@ class makeMap{
                 .attr('stroke', '#666')
                 .attr('stroke-width', 0.5)
                 .attr('fill', '#2566CC')
+                .on('mouseover', (e,d) => {
+                    d3.select('#tooltip')
+                        .style('opacity', 1)
+                        .html(`<div class="tooltip-label">${d.properties.name_local}</div>`);
+                })
+                .on('mousemove', (e) => {
+                    const padding = 10;
+                    d3.select('#tooltip')
+                        .style('left', (e.pageX + padding) + 'px')
+                        .style('top', (e.pageY + padding) + 'px');
+                })
+                .on('mouseleave', () => {
+                    d3.select('#tooltip')
+                        .style('opacity', 0);
+                })
                 .on('click', function(ev,d) {
                     const is_active = filter.includes(d.properties.woe_name);
                     if ( is_active ) {
